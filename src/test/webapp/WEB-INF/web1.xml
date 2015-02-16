@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<!-- WS发布 -->
+	<servlet>
+		<servlet-name>WebServiceServlet</servlet-name>
+		<servlet-class>com.github.cxfplus.CXFPlusServlet</servlet-class>
+		<init-param>
+			<param-name>trace</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>init-class</param-name>
+			<param-value>org.easyframe.InitClass</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WebServiceServlet</servlet-name>
+		<url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

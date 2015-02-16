@@ -5,14 +5,10 @@
 	<!-- WS发布 -->
 	<servlet>
 		<servlet-name>WebServiceServlet</servlet-name>
-		<servlet-class>org.easyframe.cxfplus.CXFPlusServlet</servlet-class>
+		<servlet-class>com.github.cxfplus.CXFPlusServlet</servlet-class>
 		<init-param>
 			<param-name>trace</param-name>
 			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>init-class</param-name>
-			<param-value>org.easyframe.InitClass</param-value>
 		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
@@ -20,7 +16,13 @@
 		<servlet-name>WebServiceServlet</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
-
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-test-beans.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>index.html</welcome-file>

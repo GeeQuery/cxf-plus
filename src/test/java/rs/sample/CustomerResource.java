@@ -12,10 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
-import org.easyframe.jaxrs.IRestfulService;
-
 @Path("/customers")
-public interface CustomerResource extends IRestfulService{
+public interface CustomerResource{
 
 	@POST
 	@Consumes("application/xml")

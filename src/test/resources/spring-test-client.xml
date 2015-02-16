@@ -16,20 +16,20 @@
 
 	
 
-	<bean id="peopleServiceWs" class="org.easyframe.cxfplus.spring.JaxWsProxyBeanFactory"
-		p:url="http://localhost:8080/cxf-plus/ws/PeopleService" p:serviceInterface="org.easyframe.jaxrs.PeopleService" />
+	<bean id="peopleServiceWs" class="com.github.cxfplus.client.factory.JaxWsProxyBeanFactory"
+		p:url="http://localhost:8080/cxf-plus/ws/PeopleService" p:serviceInterface="com.github.cxfplus.jaxrs.PeopleService" />
 		
-	<bean id="helloServiceWs" class="org.easyframe.cxfplus.spring.JaxWsProxyBeanFactory"
-		p:url="http://localhost:8080/cxf-plus/ws/HelloService" p:serviceInterface="org.easyframe.jaxws.HelloService" />
+	<bean id="helloServiceWs" class="com.github.cxfplus.client.factory.JaxWsProxyBeanFactory"
+		p:url="http://localhost:8080/cxf-plus/ws/HelloService" p:serviceInterface="com.github.cxfplus.jaxws.HelloService" />
 		
-	<bean id="peopleService" class="org.easyframe.cxfplus.spring.JaxRsProxyBeanFactory"
-		p:url="http://localhost:8080/cxf-plus/ws/rest" p:serviceInterface="org.easyframe.jaxrs.PeopleService" />
+	<bean id="peopleService" class="com.github.cxfplus.client.factory.JaxRsProxyBeanFactory"
+		p:url="http://localhost:8080/cxf-plus/ws/rest" p:serviceInterface="com.github.cxfplus.jaxrs.PeopleService" />
 	
-	<bean id="peopleServiceXml" class="org.easyframe.cxfplus.spring.JaxRsProxyBeanFactory"
-		p:url="http://localhost:8080/cxf-plus/ws/rest" p:serviceInterface="org.easyframe.jaxrs.PeopleServiceXml" />
+	<bean id="peopleServiceXml" class="com.github.cxfplus.client.factory.JaxRsProxyBeanFactory"
+		p:url="http://localhost:8080/cxf-plus/ws/rest" p:serviceInterface="com.github.cxfplus.jaxrs.PeopleServiceXml" />
 		
-	<bean id="helloService" class="org.easyframe.cxfplus.spring.JaxRsProxyBeanFactory"
-		p:url="http://localhost:8080/cxf-plus/ws/rest" p:serviceInterface="org.easyframe.jaxws.HelloService" />
+	<bean id="helloService" class="com.github.cxfplus.client.factory.JaxRsProxyBeanFactory"
+		p:url="http://localhost:8080/cxf-plus/ws/rest" p:serviceInterface="com.github.cxfplus.jaxws.HelloService" />
 		
 
 	
