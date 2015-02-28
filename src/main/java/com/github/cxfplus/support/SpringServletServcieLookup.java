@@ -6,9 +6,8 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
-import jef.tools.Assert;
-
 import org.springframework.context.ApplicationContext;
+import org.springframework.util.Assert;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class SpringServletServcieLookup implements ServiceLookup {

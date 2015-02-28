@@ -38,10 +38,9 @@ package com.github.cxfplus.com.sun.xml.bind.v2.model.runtime;
 
 import java.lang.reflect.Type;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.NonElementRef;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * Runtime version of {@link NonElementRef}.

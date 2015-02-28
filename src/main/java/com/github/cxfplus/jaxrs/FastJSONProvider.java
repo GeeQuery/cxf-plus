@@ -24,6 +24,11 @@ import org.apache.cxf.helpers.IOUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+/**
+ * 使用FastJSON对JSON格式的REST报文进行序列化和反序列化，简化CXF在处理REST服务JSON格式报文时的问题
+ * @author jiyi
+ *
+ */
 @Produces({ "application/json", "application/*+json" })
 @Consumes({ "application/json", "application/*+json" ,"application/fast-json"})
 @Provider

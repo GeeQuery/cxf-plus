@@ -40,8 +40,9 @@ import java.io.IOException;
 
 import javax.xml.stream.XMLStreamException;
 
+import org.xml.sax.SAXException;
+
 import com.github.cxfplus.com.sun.xml.bind.api.AccessorException;
-import com.github.cxfplus.com.sun.xml.bind.v2.util.QNameMap;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.ElementPropertyInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.PropertyKind;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeElementPropertyInfo;
@@ -50,13 +51,12 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.JAXBContextImpl;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Name;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.XMLSerializer;
+import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.ListTransducedAccessorImpl;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.TransducedAccessor;
-import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.ChildLoader;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.LeafPropertyLoader;
-
-import org.xml.sax.SAXException;
+import com.github.cxfplus.com.sun.xml.bind.v2.util.QNameMap;
 
 /**
  * {@link Property} implementation for {@link ElementPropertyInfo} whose

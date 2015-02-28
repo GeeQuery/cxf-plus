@@ -45,15 +45,14 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-
 import com.github.cxfplus.com.sun.xml.bind.Util;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.TypeInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeClassInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimePropertyInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.TransducedAccessor;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
 
 /**
  * Prepares optimized {@link TransducedAccessor} from templates.

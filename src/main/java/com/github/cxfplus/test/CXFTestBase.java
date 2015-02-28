@@ -9,11 +9,6 @@ import java.util.List;
 
 import javax.wsdl.WSDLException;
 
-import jef.tools.Assert;
-import jef.tools.StringUtils;
-import jef.tools.reflect.BeanUtils;
-import jef.tools.reflect.MethodEx;
-
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.frontend.ServerFactoryBean;
@@ -23,11 +18,15 @@ import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.apache.cxf.test.AbstractCXFTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.github.cxfplus.client.ClientFactory;
 import com.github.cxfplus.client.WsClientFactoryImpl;
+import com.github.cxfplus.core.reflect.BeanUtils;
+import com.github.cxfplus.core.reflect.MethodEx;
+import com.github.cxfplus.core.util.StringUtils;
 import com.github.cxfplus.jaxws.interceptors.TraceHandler;
 import com.github.cxfplus.jaxws.support.CXFPlusServiceFactoryBean;
 import com.github.cxfplus.service.factory.CXFPlusServiceBean;
@@ -304,8 +303,11 @@ public abstract class CXFTestBase extends AbstractCXFTest {
 		sf.setAddress(url);
 		sf.setServiceBean(ws.getServiceBean());
 		sf.setServiceClass(ws.getServiceClass());
-		if (printTrace())
-			sf.getHandlers().add(new TraceHandler());
+		if (printTrace()){
+			sf.getInInterceptors().add(new LoggingInInterceptor());
+			sf.getOutInterceptors().add(new LoggingOutInterceptor());
+//			sf.getHandlers().add(TraceHandler.getSingleton());
+		}
 		Server server = sf.create();
 		return server;
 	}

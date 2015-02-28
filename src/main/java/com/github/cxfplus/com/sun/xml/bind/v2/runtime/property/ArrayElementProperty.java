@@ -45,9 +45,6 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.GenericUtils;
-
 import org.xml.sax.SAXException;
 
 import com.github.cxfplus.com.sun.xml.bind.api.AccessorException;
@@ -72,6 +69,8 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.Receiver;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.TextLoader;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import com.github.cxfplus.com.sun.xml.bind.v2.util.QNameMap;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.GenericUtils;
 
 /**
  * {@link Property} implementation for multi-value property that maps to an element.

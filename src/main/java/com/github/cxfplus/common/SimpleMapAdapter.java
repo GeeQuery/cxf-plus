@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import jef.common.SimpleMap;
+import com.github.cxfplus.core.container.SimpleMap;
 
 /**
  * 使SimpleMap对象支持JAXB序列化和反序列化

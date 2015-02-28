@@ -36,7 +36,6 @@
 
 package com.github.cxfplus.com.sun.xml.bind.v2.model.impl;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,10 +43,6 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
 
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.Adapter;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
@@ -60,6 +55,9 @@ import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeTypeRef;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.IllegalAnnotationException;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * @author Kohsuke Kawaguchi

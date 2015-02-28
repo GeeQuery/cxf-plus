@@ -40,6 +40,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
@@ -53,9 +54,6 @@ import java.util.logging.Level;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-import jef.tools.ArrayUtils;
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.istack.FinalArrayList;
 import com.github.cxfplus.com.sun.xml.bind.Util;
 import com.github.cxfplus.com.sun.xml.bind.api.JAXBRIContext;
@@ -63,6 +61,7 @@ import com.github.cxfplus.com.sun.xml.bind.api.TypeReference;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.annotation.RuntimeAnnotationReader;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.JAXBContextImpl;
 import com.github.cxfplus.com.sun.xml.bind.v2.util.TypeCast;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * This class is responsible for producing RI JAXBContext objects.  In
@@ -78,8 +77,17 @@ import com.github.cxfplus.com.sun.xml.bind.v2.util.TypeCast;
 @SuppressWarnings("rawtypes") 
 public class ContextFactory {
 	public static JAXBContext createContext(Class[] classes, Map<String,Object> properties ) throws JAXBException {
-		Type[] types=ArrayUtils.cast(classes, Type.class);
+		Type[] types=cast(classes, Type.class);
 		return createContext(types,properties);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <S, T> T[] cast(S[] from, Class<T> to) {
+		T[] result = (T[]) Array.newInstance(to, from.length);
+		for (int i = 0; i < result.length; i++) {
+			result[i] = (T) from[i];
+		}
+		return result;
 	}
     /**
      * The API will invoke this method via reflection
@@ -147,7 +155,7 @@ public class ContextFactory {
             Collection<TypeReference> typeRefs, Map<Class,Class> subclassReplacements, 
             String defaultNsUri, boolean c14nSupport, RuntimeAnnotationReader ar, 
             boolean xmlAccessorFactorySupport, boolean allNillable, boolean retainPropertyInfo) throws JAXBException {
-    	Type[] types=ArrayUtils.cast(classes, Type.class);
+    	Type[] types=cast(classes, Type.class);
     	return createContext(types,typeRefs,subclassReplacements,defaultNsUri,c14nSupport,ar,xmlAccessorFactorySupport,allNillable,retainPropertyInfo);
     }
     

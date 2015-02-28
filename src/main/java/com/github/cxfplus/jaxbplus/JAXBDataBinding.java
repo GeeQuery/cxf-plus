@@ -52,11 +52,6 @@ import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.GenericUtils;
-import jef.tools.reflect.MethodEx;
-
 import org.apache.cxf.common.injection.NoJSR250Annotations;
 import org.apache.cxf.common.logging.LogUtils;
 import org.apache.cxf.common.util.ModCountCopyOnWriteArrayList;
@@ -81,6 +76,10 @@ import org.apache.cxf.ws.addressing.ObjectFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.GenericUtils;
+import com.github.cxfplus.core.reflect.MethodEx;
 import com.github.cxfplus.jaxbplus.JAXBContextCache.CachedContextAndSchemas;
 import com.github.cxfplus.jaxbplus.io.DataReaderImpl;
 import com.github.cxfplus.jaxbplus.io.DataWriterImpl;
@@ -764,14 +763,10 @@ public class JAXBDataBinding extends AbstractDataBinding
     private static WrapperHelper compileWrapperHelper(Class<?> wrapperType, Method setMethods[],
                                                       Method getMethods[], Method jaxbMethods[],
                                                       Field fields[], Object objectFactory) {
-        try {
-            Class.forName("jef.accelerator.asm.ClassWriter");
             return WrapperHelperCompiler.compileWrapperHelper(wrapperType, setMethods, getMethods,
                                                               jaxbMethods, fields, objectFactory);
-        } catch (ClassNotFoundException e) {
-            // ASM not found, just use reflection based stuff
-        }
-        return null;
+       
+//        return null;
     }
 
     public List<Interceptor<? extends Message>> getOutFaultInterceptors() {

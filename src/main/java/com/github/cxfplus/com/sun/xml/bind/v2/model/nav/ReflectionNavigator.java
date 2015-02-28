@@ -47,11 +47,11 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Location;
-import jef.common.annotation.ObjectName;
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.GenericUtils;
-import jef.tools.reflect.MethodEx;
+import com.github.cxfplus.core.container.ObjectName;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.GenericUtils;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * {@link Navigator} implementation for {@code java.lang.reflect}.

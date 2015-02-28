@@ -3,8 +3,6 @@ package ws.sample;
 import java.util.Arrays;
 import java.util.Map;
 
-import jef.common.log.LogUtil;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -43,6 +41,6 @@ public class HttpWebServiceTest {
 		String url="http://localhost:8080/cxf-plus/ws/MyWsTest";
 		MyWsTest bean=Clients.createProxy(url, MyWsTest.class);
 		Map<String,Object> objmap=bean.getAttribute();
-		LogUtil.show(objmap);
+		System.out.println(objmap);
 	}
 }

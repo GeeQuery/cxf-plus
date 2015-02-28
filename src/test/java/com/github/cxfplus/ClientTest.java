@@ -4,23 +4,23 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import jef.tools.Assert;
-
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import com.github.cxfplus.jaxrs.People;
-import com.github.cxfplus.jaxrs.PeopleService;
-import com.github.cxfplus.jaxrs.PeopleServiceXml;
-import com.github.cxfplus.jaxws.HelloService;
-import com.github.cxfplus.jaxws.interceptors.TraceHandler;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
+
+import com.github.cxfplus.jaxrs.People;
+import com.github.cxfplus.jaxrs.PeopleService;
+import com.github.cxfplus.jaxrs.PeopleServiceXml;
+import com.github.cxfplus.jaxws.HelloService;
+import com.github.cxfplus.jaxws.interceptors.TraceHandler;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-test-client.xml" })
@@ -111,11 +111,11 @@ public class ClientTest extends org.junit.Assert implements InitializingBean{
 	//调试用
 	@Ignore
 	@Test
-	public void rawTestWs(){
+	public void rawTestWsClient(){
 		JaxWsProxyFactoryBean bean=new JaxWsProxyFactoryBean();
 		bean.setAddress("http://10.17.35.103:8080/dubbo-test/services/vision.apollo.jaxws.HelloService");
 		bean.setServiceClass(HelloService.class);
-			bean.getHandlers().add(new TraceHandler());
+			bean.getHandlers().add(TraceHandler.getSingleton());
 		HelloService s=(HelloService)bean.create();
 		String r=s.sayHello("ZHAHH");
 		System.out.println(r);

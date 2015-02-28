@@ -40,9 +40,8 @@ import java.lang.reflect.Type;
 
 import javax.xml.bind.JAXBElement;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.ElementInfo;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi

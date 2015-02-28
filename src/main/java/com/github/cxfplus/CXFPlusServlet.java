@@ -1,5 +1,6 @@
 package com.github.cxfplus;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -9,15 +10,9 @@ import javax.servlet.ServletException;
 import javax.ws.rs.Path;
 import javax.xml.namespace.QName;
 
-import jef.common.log.LogUtil;
-import jef.tools.ArrayUtils;
-import jef.tools.StringUtils;
-import jef.tools.reflect.BeanUtils;
-
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.frontend.ServerFactoryBean;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.ResourceProvider;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
@@ -26,9 +21,13 @@ import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.cxfplus.core.util.StringUtils;
 import com.github.cxfplus.jaxrs.FastJSONProvider;
+import com.github.cxfplus.jaxws.interceptors.LoggingInInterceptor;
+import com.github.cxfplus.jaxws.interceptors.LoggingOutInterceptor;
 import com.github.cxfplus.jaxws.interceptors.TraceHandler;
 import com.github.cxfplus.jaxws.support.CXFPlusServiceFactoryBean;
+import com.github.cxfplus.jmx.CXFPlus;
 import com.github.cxfplus.service.factory.CXFPlusServiceBean;
 import com.github.cxfplus.support.DefaultImpl;
 import com.github.cxfplus.support.ServiceDefinition;
@@ -45,14 +44,12 @@ import com.github.cxfplus.support.SpringServletServcieLookup;
  */
 public class CXFPlusServlet extends CXFNonSpringServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private Logger log = LoggerFactory.getLogger(getClass());
 	private ServiceLookup WSlookup;
 	private ServiceLookup RSlookup;
 	private ServiceProcessor serviceUtill;
-	private String httpPrefix="";
-	private boolean trace;
-	
+	private String httpPrefix = "";
+
 	public String getRestBasePath() {
 		return restBasePath;
 	}
@@ -66,15 +63,12 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 	 */
 	private boolean wsSimpleMode = false;
 	private String[] wsNamePattern;
-	
-	
-	private int restUseFastJson=1; //0 不使用 1 使用写 2 使用读写
+
+	private int restUseFastJson = 1; // 0 不使用 1 使用写 2 使用读写
 	private boolean restJsonWithClassname;
-	private String restBasePath="/rest";
+	private String restBasePath = "/rest";
 	private String[] restNamePattern;
 
-	
-	
 	public String getHttpPrefix() {
 		return httpPrefix;
 	}
@@ -98,7 +92,7 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 		processWebservice();
 		processJaxRs();
 	}
-	
+
 	public ServiceLookup getWSlookup() {
 		return WSlookup;
 	}
@@ -116,47 +110,49 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 	}
 
 	private void initLookup(ServletConfig sc) {
-		//Use init-class to get RsLookup and WsLookup
-		String clz=sc.getInitParameter("init-class");
-		if(StringUtils.isNotEmpty(clz)){
+		// Use init-class to get RsLookup and WsLookup
+		String clz = sc.getInitParameter("init-class");
+		if (StringUtils.isNotEmpty(clz)) {
 			try {
-				this.getClass().getClassLoader().loadClass(clz);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				Class<?> c = this.getClass().getClassLoader().loadClass(clz);
+				Constructor<?> con = c.getConstructor(CXFPlusServlet.class);
+				con.newInstance(this);
+			} catch (Exception e) {
+				log.error("process init-class error!", e);
 			}
-			BeanUtils.newInstance(clz, this);
 		}
-		//Set default WsLookup
+		// Set default WsLookup
 		if (WSlookup == null) {
-			WSlookup = new SpringServletAnnotationLookup(getServletContext(),javax.jws.WebService.class);
+			WSlookup = new SpringServletAnnotationLookup(getServletContext(), javax.jws.WebService.class);
 		}
-		//Set default RsLookup
-		if(RSlookup==null){
-			try{
-				Class<?> c=Class.forName("javax.ws.rs.Path");
-				RSlookup=new SpringServletAnnotationLookup(getServletContext(), Path.class);
-			}catch(ClassNotFoundException e){
+		// Set default RsLookup
+		if (RSlookup == null) {
+			try {
+				Class<?> c = Class.forName("javax.ws.rs.Path");
+				RSlookup = new SpringServletAnnotationLookup(getServletContext(), Path.class);
+			} catch (ClassNotFoundException e) {
 				log.warn("Class 'javax.ws.rs.Path' was not exist. JAX-RS not supported.");
 			}
 		}
 	}
 
 	public void processJaxRs() {
-		if(RSlookup==null)return;
+		if (RSlookup == null)
+			return;
 		log.debug("Start procesing the Restful-Services.");
 		Map<Class<?>, ResourceProvider> resProviders = new HashMap<Class<?>, ResourceProvider>();
 		for (ServiceDefinition def : RSlookup.getServices()) {
 			if (def.getServiceClass() == null)
 				continue;
-			
-			if (canPublish(def.getName(),restNamePattern)) {
-				ServiceDefinition context=serviceUtill.processServiceDef(def);
+
+			if (canPublish(def.getName(), restNamePattern)) {
+				ServiceDefinition context = serviceUtill.processServiceDef(def);
 				if (context != null) {
 					resProviders.put(context.getServiceClass(), new SingletonResourceProvider(context.getServiceBean()));
 				}
 			}
 		}
-		//计算完成开始发布
+		// 计算完成开始发布
 		if (!resProviders.isEmpty()) {
 			doPublishRestful(resProviders);
 		}
@@ -172,7 +168,7 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 		for (ServiceDefinition def : WSlookup.getServices()) {
 			if (def.getServiceClass() == null)
 				continue;
-			if (canPublish(def.getName(),wsNamePattern)) {
+			if (canPublish(def.getName(), wsNamePattern)) {
 				try {
 					doPublishWebservice(serviceUtill.processServiceDef(def));
 				} catch (Throwable e) {
@@ -186,21 +182,22 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 		initParam(null);
 		this.setBus(BusFactory.getDefaultBus());
 	}
+
 	private void initParam(ServletConfig sc) {
-		if(sc==null){
-			this.trace=true;
-			this.wsSimpleMode=false;
-		}else{
-			this.trace = StringUtils.toBoolean(sc.getInitParameter("trace"), false);
+		if (sc == null) {
+			CXFPlus.getSingleton().setTrace(true);
+			this.wsSimpleMode = false;
+		} else {
+			CXFPlus.getSingleton().setTrace(StringUtils.toBoolean(sc.getInitParameter("trace"), false));
 			this.wsSimpleMode = StringUtils.toBoolean(sc.getInitParameter("simpleMode"), false);
 			this.wsNamePattern = StringUtils.split(sc.getInitParameter("ws-service-name"), ',');
-			
-			String restBasepath=sc.getInitParameter("rest-basepath");
-			if(StringUtils.isNotEmpty(restBasepath)){
-				this.restBasePath=restBasepath;
+
+			String restBasepath = sc.getInitParameter("rest-basepath");
+			if (StringUtils.isNotEmpty(restBasepath)) {
+				this.restBasePath = restBasepath;
 			}
-			this.restUseFastJson=StringUtils.toInt(sc.getInitParameter("rest-use-fastjson"), 2);
-			this.restJsonWithClassname=StringUtils.toBoolean(sc.getInitParameter("rest-json-withclassname"), false);
+			this.restUseFastJson = StringUtils.toInt(sc.getInitParameter("rest-use-fastjson"), 2);
+			this.restJsonWithClassname = StringUtils.toBoolean(sc.getInitParameter("rest-json-withclassname"), false);
 			this.restNamePattern = StringUtils.split(sc.getInitParameter("rest-service-name"), ',');
 		}
 		if (WSlookup instanceof SpringServletServcieLookup) {
@@ -224,7 +221,7 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 	/*
 	 * 判断是否要发布
 	 */
-	private boolean canPublish(String name,String[] namePatterns) {
+	private boolean canPublish(String name, String[] namePatterns) {
 		if ((namePatterns == null) || (namePatterns.length == 0))
 			return true;
 		for (String key : namePatterns) {
@@ -245,59 +242,40 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 		String[] packageName = StringUtils.split(serviceClass.getPackage().getName(), ".");
 		ArrayUtils.reverse(packageName);
 		String servName = service.getServiceClass().getSimpleName();
-		String address=httpPrefix+service.getPath();
+		String address = httpPrefix + service.getPath();
+		ServerFactoryBean sf;
 		if (this.wsSimpleMode) {
-			ServerFactoryBean sf = new ServerFactoryBean(new CXFPlusServiceBean());
-			sf.setServiceClass(serviceClass);
-			sf.setServiceBean(serviceBean);
-			sf.setServiceName(new QName("http://" + StringUtils.join(packageName, ".") + "/", servName));
-			sf.setAddress(address);
-			if (this.trace) {
-				sf.getInInterceptors().add(new LoggingInInterceptor());
-				sf.getOutInterceptors().add(new LoggingOutInterceptor());
-			}
-			sf.create();
+			sf = new ServerFactoryBean(new CXFPlusServiceBean());
 		} else {
-			JaxWsServerFactoryBean sf=new JaxWsServerFactoryBean(new CXFPlusServiceFactoryBean());
-			sf.setBus(getBus());
-			sf.setServiceBean(serviceBean);
-			sf.setServiceClass(serviceClass);
-			sf.setAddress(address);
-			sf.setServiceName(new QName("http://" + StringUtils.join(packageName, ".") + "/", servName));
-			if(trace){
-				sf.getHandlers().add(new TraceHandler());
-			}
-			sf.create();
-			
-//			org.apache.cxf.jaxws.EndpointImpl epimpl = new org.apache.cxf.jaxws22.EndpointImpl(getBus(), serviceBean, new JaxWsServerFactoryBean(new CXFPlusServiceFactoryBean()));
-//			epimpl.setServiceName(new QName("http://" + StringUtils.join(packageName, ".") + "/", servName));
-//			if (this.trace) {
-//				epimpl.getHandlers().add(new TraceHandler());
-//			}
-//			epimpl.publish(address);
-			
-			LogUtil.show("Starting Webservice: " + address);
+			sf = new JaxWsServerFactoryBean(new CXFPlusServiceFactoryBean());
 		}
+		sf.setBus(getBus());
+		sf.setServiceClass(serviceClass);
+		sf.setServiceBean(serviceBean);
+		sf.setServiceName(new QName("http://" + StringUtils.join(packageName, ".") + "/", servName));
+		sf.setAddress(address);
+		sf.getInInterceptors().add(new LoggingInInterceptor());
+		sf.getOutInterceptors().add(new LoggingOutInterceptor());
+		sf.create();
+		log.info("Starting Webservice: " + address);
 	}
-	
+
 	private void doPublishRestful(Map<Class<?>, ResourceProvider> springResources) {
 		JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
 		sf.setBus(getBus());
 		for (Entry<Class<?>, ResourceProvider> e : springResources.entrySet()) {
 			sf.setResourceClasses(e.getKey());
 			sf.setResourceProvider(e.getKey(), e.getValue());
-			LogUtil.show("Publishing JAX-RS Service "+ e+" at "+ httpPrefix+restBasePath);
+			log.info("Publishing JAX-RS Service {} at {}", e, httpPrefix + restBasePath);
 		}
-		sf.setAddress(httpPrefix+restBasePath);
-		if(restUseFastJson==1){
-			sf.setProvider(new FastJSONProvider(false,restJsonWithClassname));
-		}else{
-			sf.setProvider(new FastJSONProvider(true,restJsonWithClassname));
+		sf.setAddress(httpPrefix + restBasePath);
+		if (restUseFastJson == 1) {
+			sf.setProvider(new FastJSONProvider(false, restJsonWithClassname));
+		} else {
+			sf.setProvider(new FastJSONProvider(true, restJsonWithClassname));
 		}
-		if(trace){
-			sf.getInInterceptors().add(new LoggingInInterceptor());
-			sf.getOutInterceptors().add(new LoggingOutInterceptor());	
-		}
+		sf.getInInterceptors().add(new LoggingInInterceptor());
+		sf.getOutInterceptors().add(new LoggingOutInterceptor());
 		sf.create();
 
 	}

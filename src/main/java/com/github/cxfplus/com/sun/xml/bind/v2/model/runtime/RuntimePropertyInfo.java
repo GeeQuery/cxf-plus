@@ -41,7 +41,7 @@ import java.util.Collection;
 
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.PropertyInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
-import jef.tools.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * {@link PropertyInfo} that exposes more information.

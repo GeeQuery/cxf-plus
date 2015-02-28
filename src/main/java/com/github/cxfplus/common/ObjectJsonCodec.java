@@ -2,7 +2,7 @@ package com.github.cxfplus.common;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.easyframe.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 
 /**
  * 标准Json格式的的序列化和反序列化

@@ -40,10 +40,9 @@ import java.lang.reflect.Type;
 
 import javax.xml.namespace.QName;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.LeafInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi

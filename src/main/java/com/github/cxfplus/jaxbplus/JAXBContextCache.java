@@ -37,13 +37,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.transform.dom.DOMSource;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.MethodEx;
-
 import org.apache.cxf.common.classloader.ClassLoaderUtils;
 import org.apache.cxf.common.util.CacheMap;
 import org.apache.cxf.common.util.CachedClass;
 import org.apache.cxf.common.util.StringUtils;
+
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * 

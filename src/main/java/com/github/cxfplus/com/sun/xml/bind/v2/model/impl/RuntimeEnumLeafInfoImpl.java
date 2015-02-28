@@ -37,7 +37,6 @@
 package com.github.cxfplus.com.sun.xml.bind.v2.model.impl;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -45,10 +44,6 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
-
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
 
 import org.xml.sax.SAXException;
 
@@ -61,6 +56,9 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.IllegalAnnotationException
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Name;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.XMLSerializer;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * @author Kohsuke Kawaguchi

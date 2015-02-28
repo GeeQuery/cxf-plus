@@ -41,16 +41,15 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.annotation.AnnotationReader;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.TypeInfoSet;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.ReflectionNavigator;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeNonElement;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeTypeInfoSet;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * {@link TypeInfoSet} specialized for runtime.

@@ -70,8 +70,8 @@ import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.IllegalAnnotationException;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Location;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.SwaRefAdapter;
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.GenericUtils;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.GenericUtils;
 
 /**
  * Default partial implementation for {@link PropertyInfo}.

@@ -81,6 +81,13 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import com.github.cxfplus.com.sun.istack.NotNull;
 import com.github.cxfplus.com.sun.istack.Pool;
 import com.github.cxfplus.com.sun.xml.bind.DatatypeConverterImpl;
@@ -126,18 +133,9 @@ import com.github.cxfplus.com.sun.xml.bind.v2.schemagen.XmlSchemaGenerator;
 import com.github.cxfplus.com.sun.xml.bind.v2.util.EditDistance;
 import com.github.cxfplus.com.sun.xml.bind.v2.util.QNameMap;
 import com.github.cxfplus.com.sun.xml.txw2.output.ResultFactory;
-import jef.common.log.LogUtil;
-import jef.tools.StringUtils;
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-import org.xml.sax.helpers.DefaultHandler;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 
 /**
@@ -462,10 +460,10 @@ public final class JAXBContextImpl extends JAXBRIContext {
         final RuntimeModelBuilder builder;
         try{
         	builder = new RuntimeModelBuilder(this,annotaitonReader,subclassReplacements,defaultNsUri);
-        }catch(Throwable t){
-        	String error=StringUtils.exceptionStack(t);
-        	LogUtil.error(error);
-        	throw new RuntimeException(t.getMessage());
+        }catch(RuntimeException t){
+        	throw t;
+        }catch(Exception t){
+        	throw new RuntimeException(t);
         }
 
         IllegalAnnotationsException.Builder errorHandler = new IllegalAnnotationsException.Builder();

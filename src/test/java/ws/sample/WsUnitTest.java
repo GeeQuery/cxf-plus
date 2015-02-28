@@ -28,7 +28,7 @@ public class WsUnitTest extends CXFTestBase{
 	@Test
 	public void testGenrateWSDL2() throws Exception{
 		Document wsdl=super.generateJaxWsWSDL(CxfPlusFeature.class);
-		jef.tools.XMLUtils.saveDocument(wsdl, new File("c:/cxf.wsdl"));
+		com.github.cxfplus.core.util.XMLUtils.saveDocument(wsdl, new File("c:/cxf.wsdl"));
 	}
 	
 	/**

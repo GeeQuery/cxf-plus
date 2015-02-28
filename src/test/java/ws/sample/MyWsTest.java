@@ -7,8 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.jws.WebService;
 
-import jef.common.wrapper.Page;
-
 @WebService
 public interface MyWsTest{
 	Map<String, String> method1();

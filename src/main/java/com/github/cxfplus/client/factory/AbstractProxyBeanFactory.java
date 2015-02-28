@@ -1,14 +1,12 @@
 package com.github.cxfplus.client.factory;
 
-import jef.tools.StringUtils;
-
-import com.github.cxfplus.client.ClientFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
+
+import com.github.cxfplus.client.ClientFactory;
+import com.github.cxfplus.core.util.StringUtils;
 
 public abstract class AbstractProxyBeanFactory implements FactoryBean<Object>,InitializingBean{
 private static Logger log=LoggerFactory.getLogger(JaxWsProxyBeanFactory.class);

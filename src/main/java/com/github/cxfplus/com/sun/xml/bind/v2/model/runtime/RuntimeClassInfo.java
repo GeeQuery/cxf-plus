@@ -43,13 +43,12 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import jef.tools.reflect.ClassEx;
-
 import org.xml.sax.Locator;
 
 import com.github.cxfplus.com.sun.xml.bind.annotation.XmlLocation;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.ClassInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi (kk@kohsuke.org)

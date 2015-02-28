@@ -39,14 +39,13 @@ package com.github.cxfplus.com.sun.xml.bind.v2.model.impl;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeMapPropertyInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeNonElement;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeTypeInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * @author Kohsuke Kawaguchi

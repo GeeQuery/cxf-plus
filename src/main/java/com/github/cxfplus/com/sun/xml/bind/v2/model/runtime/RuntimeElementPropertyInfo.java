@@ -40,9 +40,8 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.ElementPropertyInfo;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi

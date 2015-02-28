@@ -43,12 +43,11 @@ import java.lang.reflect.Modifier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
-
 import com.github.cxfplus.com.sun.xml.bind.Util;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.RuntimeUtil;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * @author Kohsuke Kawaguchi

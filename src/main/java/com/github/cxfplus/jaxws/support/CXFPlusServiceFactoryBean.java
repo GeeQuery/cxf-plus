@@ -40,10 +40,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
 
-import jef.tools.StringUtils;
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.GenericUtils;
-
 import org.apache.cxf.common.i18n.Message;
 import org.apache.cxf.common.injection.NoJSR250Annotations;
 import org.apache.cxf.common.logging.LogUtils;
@@ -63,6 +59,9 @@ import org.apache.cxf.service.model.ServiceInfo;
 import org.apache.cxf.service.model.UnwrappedOperationInfo;
 import org.apache.cxf.wsdl11.WSDLServiceBuilder;
 
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.GenericUtils;
+import com.github.cxfplus.core.util.StringUtils;
 import com.github.cxfplus.jaxbplus.JAXBDataBinding;
 import com.github.cxfplus.jaxws.ef.PlusWrapperClassGenerator;
 

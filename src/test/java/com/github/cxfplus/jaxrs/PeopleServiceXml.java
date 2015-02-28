@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 public interface PeopleServiceXml {
 	
 	@Produces({ MediaType.APPLICATION_XML })
-	@Path("/{email}")
+	@Path("/email/{email}")
 	@GET
 	public @Valid People getPerson(@PathParam("email") final String email);
 	
@@ -32,7 +32,7 @@ public interface PeopleServiceXml {
 	 * @return
 	 */
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("{id}")
+	@Path("/{id}")
 	@GET
 	public People find(@PathParam("id") int id);
 	
@@ -41,7 +41,7 @@ public interface PeopleServiceXml {
 	public String getDepartmentName(int id);
 	
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("")
+	@Path("/all")
 	@GET
 	public List<People> getAll();
 	

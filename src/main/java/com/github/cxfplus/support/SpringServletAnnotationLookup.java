@@ -8,9 +8,8 @@ import java.util.Map.Entry;
 
 import javax.servlet.ServletContext;
 
-import jef.tools.Assert;
-
 import org.springframework.context.ApplicationContext;
+import org.springframework.util.Assert;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class SpringServletAnnotationLookup implements ServiceLookup {

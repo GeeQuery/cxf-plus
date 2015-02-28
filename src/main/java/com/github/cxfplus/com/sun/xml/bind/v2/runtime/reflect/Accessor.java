@@ -50,11 +50,6 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.GenericUtils;
-import jef.tools.reflect.MethodEx;
-
 import org.xml.sax.SAXException;
 
 import com.github.cxfplus.com.sun.istack.Nullable;
@@ -68,6 +63,10 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.opt.OptimizedAcces
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.Loader;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.Receiver;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallingContext;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.GenericUtils;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * Accesses a particular property of a bean.

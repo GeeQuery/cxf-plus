@@ -39,7 +39,7 @@ package com.github.cxfplus.com.sun.xml.bind.v2.model.runtime;
 import java.lang.reflect.Type;
 
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.EnumLeafInfo;
-import jef.tools.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi

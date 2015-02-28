@@ -60,9 +60,13 @@ public class DynamicCall {
 	
 	/**
 	 * 由于动态方式没有作CXFPlus改造，因此复杂的接口用不了
+	 * 
+	 * 在五种客户端调用方式中，这是唯一一种纯Schema(WSDL)优先的方式，而CXF Plus改造是基于代码优先的规则，在Java代码到Web服务模型层次进行转义的机制。
+	 * 对于WSDL优先目前还不支持。。。
 	 * @throws Exception
 	 */
 	@Test
+	@Ignore
 	public void testCxfComplex() throws Exception {
 		Map result = callWsCxf("http://localhost:8080/cxf-plus/ws/MyWsTest?wsdl",
 				"method3", 

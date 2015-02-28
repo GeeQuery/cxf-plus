@@ -42,8 +42,8 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.BuiltinLeafInfo;
-import com.github.cxfplus.com.sun.xml.bind.v2.model.core.LeafInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.core.Element;
+import com.github.cxfplus.com.sun.xml.bind.v2.model.core.LeafInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
 
 /**

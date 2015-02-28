@@ -21,7 +21,7 @@ public interface PeopleService {
 	
 	@WebMethod
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{email}")
+	@Path("/email/{email}")
 	@GET
 	public @Valid People getPerson(@PathParam("email") final String email);
 	
@@ -32,7 +32,7 @@ public interface PeopleService {
 	 */
 	@WebMethod
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{id}")
+	@Path("/{id}")
 	@GET
 	public People find(@PathParam("id") int id);
 	
@@ -43,7 +43,7 @@ public interface PeopleService {
 	
 	@WebMethod
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("")
+	@Path("all")
 	@GET
 	public List<People> getAll();
 	
@@ -54,13 +54,13 @@ public interface PeopleService {
 
 	@WebMethod
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("{id}")
+	@Path("/{id}")
 	@PUT
 	public boolean update(@PathParam("id") int id, People movie);
 	
 	@WebMethod
 	@DELETE
-	@Path("{id}") 
+	@Path("/{id}") 
 	public int delete(@PathParam("id") int id);
 	
 	

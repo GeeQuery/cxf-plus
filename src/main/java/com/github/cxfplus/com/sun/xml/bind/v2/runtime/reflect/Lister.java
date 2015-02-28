@@ -56,8 +56,6 @@ import java.util.concurrent.Callable;
 
 import javax.xml.bind.JAXBException;
 
-import jef.tools.reflect.ClassEx;
-
 import org.xml.sax.SAXException;
 
 import com.github.cxfplus.com.sun.istack.SAXException2;
@@ -71,6 +69,7 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.XMLSerializer;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.LocatorEx;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.Patcher;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallingContext;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * Used to list individual values of a multi-value property, and

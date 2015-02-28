@@ -1,10 +1,11 @@
 package com.github.cxfplus.common;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import jef.tools.IOUtils;
+import com.github.cxfplus.core.util.IOUtils;
 
 /**
  * Jaxws适配器。可以将File类型的参数转为byte[]使用XML进行传输.
@@ -22,7 +23,7 @@ public class FileContentCodec extends XmlAdapter<byte[],java.io.File>{
 
 	public byte[] marshal(File v) throws Exception {
 		if(v.isFile()){
-			return IOUtils.toByteArray(v);
+			return IOUtils.toByteArray(new FileInputStream(v));
 		}else{
 			return null;
 		}

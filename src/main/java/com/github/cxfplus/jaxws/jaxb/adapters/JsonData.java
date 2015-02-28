@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import jef.common.log.LogUtil;
-
 import org.apache.cxf.common.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -47,7 +45,7 @@ public class JsonData {
 				return JSON.parseObject(data, clz);
 			}
 		} catch (ClassNotFoundException e) {
-			LogUtil.exception(e);
+			e.printStackTrace();
 		}
 		return null;
 	}

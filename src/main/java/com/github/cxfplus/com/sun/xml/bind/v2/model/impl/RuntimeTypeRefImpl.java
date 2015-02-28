@@ -40,12 +40,11 @@ import java.lang.reflect.Type;
 
 import javax.xml.namespace.QName;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeNonElement;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimePropertyInfo;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeTypeRef;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi

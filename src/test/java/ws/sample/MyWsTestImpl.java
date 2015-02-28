@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jef.common.wrapper.Page;
 import rs.sample.Customer;
 
 public class MyWsTestImpl implements MyWsTest {

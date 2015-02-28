@@ -57,7 +57,7 @@ import com.github.cxfplus.com.sun.xml.bind.v2.ContextFactory;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.annotation.RuntimeAnnotationReader;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeTypeInfoSet;
-import jef.tools.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * {@link JAXBContext} enhanced with JAXB RI specific functionalities.

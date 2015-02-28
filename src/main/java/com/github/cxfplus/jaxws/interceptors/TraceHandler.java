@@ -8,50 +8,65 @@ import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
-import jef.common.log.LogUtil;
-import jef.tools.XMLUtils;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.github.cxfplus.core.util.XMLUtils;
+import com.github.cxfplus.jmx.CXFPlus;
+
+/**
+ * JAX-WS标准的SOAP拦截器，用于输出XML报文信息
+ * @author jiyi
+ *
+ */
 public class TraceHandler implements SOAPHandler<SOAPMessageContext> {
-	private boolean format = true;
-	public TraceHandler(){}
+	private static Logger log=LoggerFactory.getLogger(TraceHandler.class);
+
+	private static TraceHandler instance=new TraceHandler();
 	
-	/**
-	 */
-	public TraceHandler(boolean format){
-		this.format=format;
+	private TraceHandler(){
 	}
 	
+	public static TraceHandler getSingleton(){
+		return instance;
+	}
+
 	public Set<QName> getHeaders() {
 		return null;
 	}
 
 	public boolean handleMessage(SOAPMessageContext arg0) {
-		trace(arg0);
+		if(CXFPlus.getSingleton().isTrace()){
+			trace(arg0);
+		}
 		return true;
 	}
 
 	public boolean handleFault(SOAPMessageContext arg0) {
-		trace(arg0);
+		if(CXFPlus.getSingleton().isTrace()){
+			trace(arg0);
+		}
 		return true;
 	}
 
 	public void close(MessageContext arg0) {
-		System.out.println("close: " + arg0.toString());
+		log.debug("close: {}", arg0);
 	}
 
 	private void trace(SOAPMessageContext messageContext) {
-		Boolean outMessageIndicator =  (Boolean)messageContext.get (MessageContext.MESSAGE_OUTBOUND_PROPERTY); 
+		Boolean outMessageIndicator =  (Boolean)messageContext.get (MessageContext.MESSAGE_OUTBOUND_PROPERTY);
+		StringBuilderWriter output=new StringBuilderWriter(512);
 		if (outMessageIndicator.booleanValue())
-			System.out.println("\nOutbound SOAP:");
+			output.append("\nOutbound SOAP:");
 		else {
-			System.out.println("\nInbound SOAP:");
+			output.append("\nInbound SOAP:");
 		}
 		SOAPMessage message = messageContext.getMessage();
+		
 		try {
-			if (format) {
+			if (CXFPlus.getSingleton().isTracePrettyFormat()) {
 				Document doc = XMLUtils.newDocument();
 				Element ele = doc.createElement("soap:Envelope");
 				doc.appendChild(ele);
@@ -60,13 +75,14 @@ public class TraceHandler implements SOAPHandler<SOAPMessageContext> {
 					ele.appendChild(doc.importNode(message.getSOAPHeader(), true));
 				if (message.getSOAPBody() != null)
 					ele.appendChild(doc.importNode(message.getSOAPBody(), true));
-				XMLUtils.printNode(ele, System.out);
+				XMLUtils.output(ele, output, null, true);
 			} else {
-				message.writeTo(System.out);
-				System.out.println("");
+				message.writeTo(new WriterOutputStream(output));
+				output.write("\r\n");
 			}
+			log.info(output.toString());
 		} catch (Exception exp) {
-			LogUtil.exception("Exception in TraceHandler:trace(messageContext) : ", exp);
+			log.error("Exception in TraceHandler:trace(messageContext) : ", exp);
 		}
 	}
 }

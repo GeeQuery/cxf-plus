@@ -22,7 +22,7 @@ public class PeopleServiceImpl implements PeopleService,PeopleServiceXml {
 
 	public People getPerson(String email) {
 		for (People p : data.values()) {
-			if (email.contains(p.getEmail())) {
+			if (p.getEmail().contains(email)) {
 				return p;
 			}
 		}

@@ -38,11 +38,10 @@ package com.github.cxfplus.com.sun.xml.bind.v2.model.impl;
 
 import java.lang.reflect.Type;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
 import com.github.cxfplus.com.sun.xml.bind.v2.model.runtime.RuntimeNonElement;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.Transducer;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * @author Kohsuke Kawaguchi

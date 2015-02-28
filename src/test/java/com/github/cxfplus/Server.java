@@ -1,7 +1,5 @@
 package com.github.cxfplus;
 
-import jef.tools.ThreadUtils;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -17,10 +15,11 @@ public class Server {
 	/**
 	 * 当依赖了cxf-rt-transport-http-jetty 之后，
 	 * 可以使用此方法来启动基于Jetty服务器的WebService
+	 * @throws InterruptedException 
 	 */
 	@Ignore
 	@Test
-	public void start(){
+	public void start() throws InterruptedException{
 		SimpleServiceLookup data=new SimpleServiceLookup();
 		PeopleServiceImpl p=new PeopleServiceImpl();
 		data.addService(PeopleServiceXml.class, p);
@@ -36,7 +35,7 @@ public class Server {
 		
 		
 
-		
-		ThreadUtils.doWait(this);
+		Thread.currentThread().sleep(99999999);
+		System.out.println("Server terminated.");
 	}
 }

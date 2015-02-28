@@ -38,7 +38,6 @@ package com.github.cxfplus.com.sun.xml.bind.v2.model.impl;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
@@ -48,10 +47,6 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
-
-import jef.tools.reflect.ClassEx;
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
 
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -78,6 +73,9 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.XMLSerializer;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.TransducedAccessor;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallingContext;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 /**
  * @author Kohsuke Kawaguchi (kk@kohsuke.org)

@@ -85,10 +85,6 @@ import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 
-import jef.common.log.LogUtil;
-import jef.tools.StringUtils;
-import jef.tools.reflect.ClassEx;
-
 import org.xml.sax.SAXException;
 
 import com.github.cxfplus.com.sun.istack.ByteArrayDataSource;
@@ -106,6 +102,8 @@ import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.Base64Data;
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallingContext;
 import com.github.cxfplus.com.sun.xml.bind.v2.util.ByteArrayOutputStreamEx;
 import com.github.cxfplus.com.sun.xml.bind.v2.util.DataSourceSource;
+import com.github.cxfplus.core.reflect.ClassEx;
+import com.github.cxfplus.core.util.StringUtils;
 
 /**
  * {@link BuiltinLeafInfoImpl} with a support for runtime.
@@ -231,8 +229,7 @@ public abstract class RuntimeBuiltinLeafInfoImpl<T> extends BuiltinLeafInfoImpl<
     		initBlock();	
     	}catch(Throwable e){
     		System.err.println("Error loading class RuntimeBuiltinLeafInfoImpl.");
-    		String str=StringUtils.exceptionStack(e);
-    		LogUtil.error(str);
+    		e.printStackTrace();
     	}
     }
 

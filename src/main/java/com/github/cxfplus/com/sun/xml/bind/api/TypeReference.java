@@ -42,9 +42,8 @@ import java.util.Collection;
 
 import javax.xml.namespace.QName;
 
-import jef.tools.reflect.ClassEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.model.nav.Navigator;
+import com.github.cxfplus.core.reflect.ClassEx;
 
 /**
  * A reference to a JAXB-bound type.

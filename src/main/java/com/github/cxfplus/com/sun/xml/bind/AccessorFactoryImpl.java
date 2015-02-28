@@ -38,10 +38,9 @@ package com.github.cxfplus.com.sun.xml.bind;
 
 import javax.xml.bind.JAXBException;
 
-import jef.tools.reflect.FieldEx;
-import jef.tools.reflect.MethodEx;
-
 import com.github.cxfplus.com.sun.xml.bind.v2.runtime.reflect.Accessor;
+import com.github.cxfplus.core.reflect.FieldEx;
+import com.github.cxfplus.core.reflect.MethodEx;
 
 public class AccessorFactoryImpl implements AccessorFactory {
 
