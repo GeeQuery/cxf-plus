@@ -269,11 +269,11 @@ public class CXFPlusServlet extends CXFNonSpringServlet {
 			log.info("Publishing JAX-RS Service {} at {}", e, httpPrefix + restBasePath);
 		}
 		sf.setAddress(httpPrefix + restBasePath);
-		if (restUseFastJson == 1) {
-			sf.setProvider(new FastJSONProvider(false, restJsonWithClassname));
-		} else {
+//		if (restUseFastJson == 1) {
+//			sf.setProvider(new FastJSONProvider(false, restJsonWithClassname));
+//		} else {
 			sf.setProvider(new FastJSONProvider(true, restJsonWithClassname));
-		}
+//		}
 		sf.getInInterceptors().add(new LoggingInInterceptor());
 		sf.getOutInterceptors().add(new LoggingOutInterceptor());
 		sf.create();

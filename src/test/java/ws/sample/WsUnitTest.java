@@ -2,11 +2,11 @@ package ws.sample;
 import java.io.File;
 import java.util.Map;
 
-import org.apache.cxf.helpers.XMLUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.github.cxfplus.core.util.XMLUtils;
 import com.github.cxfplus.test.CXFTestBase;
 import com.google.common.collect.ImmutableMap;
 
@@ -22,7 +22,7 @@ public class WsUnitTest extends CXFTestBase{
 	public void testGenrateWSDL() throws Exception{
 		Document wsdl=super.generateJaxWsWSDL(MyWsTest.class);
 		assertValid("//wsdl:types", wsdl);
-		XMLUtils.printDOM(wsdl);
+		XMLUtils.printNode(wsdl,System.out);
 	}
 
 	@Test

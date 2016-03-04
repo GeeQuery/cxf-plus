@@ -23,7 +23,6 @@ import org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean;
 import org.apache.cxf.message.Exchange;
 import org.apache.cxf.resource.ResourceManager;
 import org.apache.cxf.service.factory.FactoryBeanListener.Event;
-import org.apache.cxf.service.factory.ReflectionServiceFactoryBean;
 import org.apache.cxf.service.model.FaultInfo;
 import org.apache.cxf.service.model.InterfaceInfo;
 import org.apache.cxf.service.model.MessageInfo;
@@ -31,6 +30,7 @@ import org.apache.cxf.service.model.MessagePartInfo;
 import org.apache.cxf.service.model.OperationInfo;
 import org.apache.cxf.service.model.ServiceInfo;
 import org.apache.cxf.service.model.UnwrappedOperationInfo;
+import org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean;
 import org.apache.cxf.wsdl11.WSDLServiceBuilder;
 
 import com.github.cxfplus.core.reflect.ClassEx;
@@ -38,7 +38,7 @@ import com.github.cxfplus.core.reflect.GenericUtils;
 import com.github.cxfplus.core.util.StringUtils;
 import com.github.cxfplus.jaxbplus.JAXBDataBinding;
 
-public class CXFPlusServiceBean extends org.apache.cxf.service.factory.ReflectionServiceFactoryBean {
+public class CXFPlusServiceBean extends org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean {
 	 private static final Logger LOG = LogUtils.getLogger(JaxWsServiceFactoryBean.class);
 	 
 	 protected DataBinding createDefaultDataBinding() {

@@ -222,7 +222,7 @@ public class XMLUtils {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public static Document loadDocumentByString(String xmlContent) throws SAXException, IOException {
+	public static Document parse(String xmlContent) throws SAXException, IOException {
 		Reader reader = null;
 		try {
 			reader = new StringReader(xmlContent);

@@ -17,8 +17,8 @@ public class Server {
 	 * 可以使用此方法来启动基于Jetty服务器的WebService
 	 * @throws InterruptedException 
 	 */
-	@Ignore
 	@Test
+	@Ignore
 	public void start() throws InterruptedException{
 		SimpleServiceLookup data=new SimpleServiceLookup();
 		PeopleServiceImpl p=new PeopleServiceImpl();
@@ -29,7 +29,7 @@ public class Server {
 		servlet.setRSlookup(data);
 		servlet.setWSlookup(data);
 		servlet.initParam();
-		servlet.setHttpPrefix("http://localhost:80/services");
+		servlet.setHttpPrefix("http://localhost:8080/cxf-plus/ws");
 		servlet.processWebservice();
 		servlet.processJaxRs();
 		

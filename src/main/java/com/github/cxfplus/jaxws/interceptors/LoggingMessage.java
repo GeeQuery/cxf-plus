@@ -3,9 +3,6 @@ package com.github.cxfplus.jaxws.interceptors;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.cxf.helpers.XMLUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -13,6 +10,7 @@ import org.xml.sax.SAXException;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.github.cxfplus.core.util.XMLUtils;
 import com.github.cxfplus.jmx.CXFPlus;
 
 public final class LoggingMessage {
@@ -137,7 +135,7 @@ public final class LoggingMessage {
 	private void appendXml(StringBuilder buffer, StringBuilder payload2) {
 		try {
 			Document doc=XMLUtils.parse(payload2.toString());
-			XMLUtils.writeTo(doc, new StringBuilderWriter(buffer),4);
+			XMLUtils.output(doc, new StringBuilderWriter(buffer),"UTF-8",true);
 			if(buffer.charAt(buffer.length()-2)=='\r'){
 				buffer.setLength(buffer.length()-2); //remove the last '\n'	
 			}
@@ -145,9 +143,6 @@ public final class LoggingMessage {
 			log.error("Format XML error:", e);
 			buffer.append(payload);
 		} catch (IOException e) {
-			log.error("Format XML error:", e);
-			buffer.append(payload);
-		} catch (ParserConfigurationException e) {
 			log.error("Format XML error:", e);
 			buffer.append(payload);
 		}

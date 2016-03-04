@@ -48,12 +48,12 @@ import org.apache.cxf.common.util.PackageUtils;
 import org.apache.cxf.common.util.StringUtils;
 import org.apache.cxf.helpers.JavaUtils;
 import org.apache.cxf.jaxws.WrapperClassGenerator;
-import org.apache.cxf.service.factory.ReflectionServiceFactoryBean;
 import org.apache.cxf.service.model.InterfaceInfo;
 import org.apache.cxf.service.model.MessageInfo;
 import org.apache.cxf.service.model.MessagePartInfo;
 import org.apache.cxf.service.model.OperationInfo;
 import org.apache.cxf.service.model.SchemaInfo;
+import org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean;
 
 import com.github.cxfplus.jaxbplus.JAXBUtils;
 import com.github.cxfplus.jaxws.support.CXFPlusServiceFactoryBean;
@@ -360,13 +360,13 @@ public final class PlusWrapperClassGenerator extends ASMHelper {
         if (!addJAXBAnnotations(fv, jaxbAnnos, name)) {
         	AnnotationVisitor av0 = fv.visitAnnotation("Ljavax/xml/bind/annotation/XmlElement;", true);
             av0.visit("name", name);
-            if (factory.isWrapperPartQualified(mpi)) {
+            if (Boolean.TRUE.equals(factory.isWrapperPartQualified(mpi))) {
                 av0.visit("namespace", mpi.getConcreteName().getNamespaceURI());            
             }
-            if (factory.isWrapperPartNillable(mpi)) {
+            if (Boolean.TRUE.equals(factory.isWrapperPartNillable(mpi))) {
                 av0.visit("nillable", Boolean.TRUE);
             }
-            if (factory.getWrapperPartMinOccurs(mpi) == 1) {
+            if (Boolean.TRUE.equals(factory.getWrapperPartMinOccurs(mpi) == 1)) {
                 av0.visit("required", Boolean.TRUE);
             }
             av0.visitEnd();            

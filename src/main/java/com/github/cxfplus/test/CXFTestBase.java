@@ -27,7 +27,6 @@ import com.github.cxfplus.client.WsClientFactoryImpl;
 import com.github.cxfplus.core.reflect.BeanUtils;
 import com.github.cxfplus.core.reflect.MethodEx;
 import com.github.cxfplus.core.util.StringUtils;
-import com.github.cxfplus.jaxws.interceptors.TraceHandler;
 import com.github.cxfplus.jaxws.support.CXFPlusServiceFactoryBean;
 import com.github.cxfplus.service.factory.CXFPlusServiceBean;
 import com.github.cxfplus.support.DefaultImpl;

@@ -46,7 +46,7 @@ public class FastJSONProvider implements MessageBodyWriter<Object>,MessageBodyRe
 		}
 	}
 	
-	static class ObjectJSON{
+	final static class ObjectJSON{
 		private Object obj;
 		private byte[] json;
 	}
